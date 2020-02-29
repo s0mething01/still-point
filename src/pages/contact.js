@@ -16,7 +16,7 @@ const ContactPage = () => {
                 <Paragraph>Kiedy robisz to co kochasz, 
                     nigdy nie <span>przepracujesz ani jednego dnia.</span>
                 </Paragraph>
-                <Form name="contact" method="POST" data-netlify="true">
+                <Form name="contact" data-netlify="true">
                         <div>
                             <label className={checkBox === 'wizyta' ? 'active checkboxLabel' : 'checkboxLabel'} htmlFor="contactChoice1">
                                 <input className="hidden" onChange={handleInputChange} type="radio" id="contactChoice1"
