@@ -5,7 +5,7 @@ import BorderBox from '../styledComponents/BorderBox';
 import Footer from '../components/Footer';
 
 const ContactPage = () => {
-    const [checkBox, setCheckbox] = useState('0');
+    const [checkBox, setCheckbox] = useState('rada');
     const [isButtonActive, setButtonActivity] = useState(false);
     const handleInputChange = e => setCheckbox(e.target.value);
     return (
@@ -16,27 +16,27 @@ const ContactPage = () => {
                 <Paragraph>Kiedy robisz to co kochasz, 
                     nigdy nie <span>przepracujesz ani jednego dnia.</span>
                 </Paragraph>
-                <Form>
+                <Form name="contact" data-netlify="true">
                         <div>
-                            <label className={checkBox === '0' ? 'active checkboxLabel' : 'checkboxLabel'} htmlFor="contactChoice1">
+                            <label className={checkBox === 'wizyta' ? 'active checkboxLabel' : 'checkboxLabel'} htmlFor="contactChoice1">
                                 <input className="hidden" onChange={handleInputChange} type="radio" id="contactChoice1"
-                                name="contact" value='0'/>
+                                name="category" value='wizyta'/>
                                 Wizyta
                             </label>
-                            <label className={checkBox === '1' ? 'active checkboxLabel' : 'checkboxLabel'} onChange={handleInputChange} htmlFor="contactChoice2">
+                            <label className={checkBox === 'rada' ? 'active checkboxLabel' : 'checkboxLabel'} onChange={handleInputChange} htmlFor="contactChoice2">
                                 <input className="hidden" type="radio" id="contactChoice2"
-                                name="contact" value='1'/>
+                                name="category" value='rada'/>
+                                Rada
+                            </label>
+                            <label className={checkBox === 'pytanie' ? 'active checkboxLabel' : 'checkboxLabel'} onChange={handleInputChange} htmlFor="contactChoice3">
+                                <input className="hidden" type="radio" id="contactChoice3"
+                                name="category" value='pytanie'/>
                                 Pytanie
                             </label>
-                            <label className={checkBox === '2' ? 'active checkboxLabel' : 'checkboxLabel'} onChange={handleInputChange} htmlFor="contactChoice3">
-                                <input className="hidden" type="radio" id="contactChoice3"
-                                name="contact" value='2'/>
-                                Inne
-                            </label>
                         </div>
-                        <input type="text" placeholder="Temat"/>
-                        <input type="text" placeholder="Twój Mail"/>
-                        <textarea name="" id="" placeholder="Treść pytania"></textarea>
+                        <input name="temat" type="text" placeholder="Temat"/>
+                        <input name="mail" type="text" placeholder="Twój Mail"/>
+                        <textarea name="treść" placeholder="Treść pytania"></textarea>
                         <button
                             onTouchStart={() =>  setButtonActivity(true)}
                             onTouchEnd={() =>  setButtonActivity(false)}
