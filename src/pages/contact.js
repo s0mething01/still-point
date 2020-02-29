@@ -16,7 +16,7 @@ const ContactPage = () => {
                 <Paragraph>Kiedy robisz to co kochasz, 
                     nigdy nie <span>przepracujesz ani jednego dnia.</span>
                 </Paragraph>
-                <Form name="contact" data-netlify="true">
+                <Form name="contact" method="POST" data-netlify="true">
                         <div>
                             <label className={checkBox === 'wizyta' ? 'active checkboxLabel' : 'checkboxLabel'} htmlFor="contactChoice1">
                                 <input className="hidden" onChange={handleInputChange} type="radio" id="contactChoice1"
@@ -34,9 +34,9 @@ const ContactPage = () => {
                                 Pytanie
                             </label>
                         </div>
-                        <input name="temat" type="text" placeholder="Temat"/>
-                        <input name="mail" type="text" placeholder="Twój Mail"/>
-                        <textarea name="treść" placeholder="Treść pytania"></textarea>
+                        <input name="title" type="text" placeholder="Temat"/>
+                        <input name="mail" type="email" placeholder="Twój Mail"/>
+                        <textarea name="content" placeholder="Treść pytania"></textarea>
                         <button
                             onTouchStart={() =>  setButtonActivity(true)}
                             onTouchEnd={() =>  setButtonActivity(false)}
