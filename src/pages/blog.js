@@ -14,16 +14,15 @@ const BlogPage = ({data}) => {
                 <BorderBox />
                 <p>Kiedy robisz to co kochasz, nigdy nie <span>przepracujesz ani jednego dnia.</span></p>
                 <StyledBlogGrid>
-                    {data.allDatoCmsArticle.nodes.map(({slug, title, id, meta, hashtags, postavatar}) => (
+                    {data.allDatoCmsArticle.nodes.map(({slug, title, id, meta, hashtags, postavatar}, index) => (
                         <BlogCard 
+                            key={index} 
                             slug={slug} 
                             title={title} 
-                            key={id} 
                             date={meta.createdAt} 
                             hashtags={hashtags} 
                             fluid={postavatar.fluid}/>
                     ))}
-                    {console.log(data.allDatoCmsArticle.nodes[0])}
                 </StyledBlogGrid>
             </StyledBlogSection>
             <Footer/>
