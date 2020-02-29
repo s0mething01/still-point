@@ -11,7 +11,12 @@ const BlogPostPage = ({theme, pageContext}) => {
                 <h4>{pageContext.meta.createdAt.slice(0,10).split('-').reverse().join('.')}</h4>
                 <h2>{pageContext.title}</h2>
                 <h3>{pageContext.hashtags}</h3>
-                {pageContext.content.map((el,index) => el.imageValue ? <img key={index} src={el.imageValue.url} alt=""/> : <p key={index}>{el.contentvalue}</p>)}
+                {pageContext.content.map((el,index) => {
+                    if(el.imageValue) return <img key={index} src={el.imageValue.url} alt=""/>;
+                    else if(el.contentvalue) return <p key={index}>{el.contentvalue}</p>;
+                    else if(el.headingcontent) return <h5 key={index}>{el.headingcontent}</h5>;
+                    return null;
+                })}
                 <Link to='/blog'>Powrót</Link>
             </StyledPostPageSection>
             <Footer/>
@@ -39,6 +44,11 @@ const StyledPostPageSection = styled(StyledSection)`
         @media (max-width: 600px) {
             font-size: ${({theme}) => theme.font.xs};
         }
+    }
+    h5 {
+        font-size: ${({theme}) => theme.font.m};
+        font-weight: ${({theme}) => theme.font.bold}; 
+        margin: 3rem 0;
     }
     a {
         font-size: ${({theme}) => theme.font.s};

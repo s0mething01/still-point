@@ -11,6 +11,9 @@ exports.createPages = ({ graphql, actions }) => {
           title
 					hashtags
 					content {
+            ... on DatoCmsHeading {
+              headingcontent
+            }
             ... on DatoCmsText {
             	contentvalue
 						}
