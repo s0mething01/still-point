@@ -7,14 +7,22 @@ const GlobalStyle = createGlobalStyle`
     * {
         padding: 0;
         margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
     body {
         font-size: 1.6rem;
         font-family: 'Montserrat', sans-serif;
-        color: ${({theme}) => theme.colors.primary}
+        color: ${({theme}) => theme.colors.primary};
     }
     html {
         font-size: 62.5%;
+        @media (max-width: 1400px) {
+            font-size:48%;
+        }
+        @media (max-width: 600px) {
+            font-size: 38%;
+        }
     }
     ul {
         list-style: none;
@@ -27,6 +35,12 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         background-color: transparent;
         border: none;
+    }
+    label {
+        box-sizing: border-box;
+    }
+    input, textarea {
+        font-family: 'Montserrat', sans-serif !important; 
     }
 `;
 

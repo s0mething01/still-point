@@ -1,24 +1,25 @@
 import React from 'react';
-import Img from 'gatsby-image';
 import { useStaticQuery, graphql } from "gatsby";
-import styled from 'styled-components'
+import styled from 'styled-components';
+import HeroImage from '../components/HeroImage';
+import StyledSection from '../styledComponents/StyledSection';
+import Footer from '../components/Footer';
 
 const IndexPage = ({theme}) => {
   const data = useStaticQuery(graphql`
     query queryForHeroImage {
       file(name: {eq: "hero"}) {
-        id
         childImageSharp {
-          fluid(duotone: { highlight: "#233540", shadow: "#DAB861", opacity: 100 }) {
+          fluid(duotone: { highlight: "#233540", shadow: "#192550", opacity: 50 }) {
             ...GatsbyImageSharpFluid_withWebp_tracedSVG
           }
         }
       }
     }
-  `);
+  `)
   return (
     <>
-      <StyledHeroSection theme={theme}>
+      <StyledHeroSection withImage theme={theme}>
         <h1>
           Still Point
           <span>Natalia Gliniecka</span>
@@ -31,34 +32,28 @@ const IndexPage = ({theme}) => {
         </ul>
         <p className="adressBox">ul. 17 Stycznia 22/1A, Zbąszyń</p>
       </StyledHeroSection>
-      <StyledImg theme={theme} fluid={data.file.childImageSharp.fluid}/>
+      <Footer withImage/>
+      <HeroImage fluid={data.file.childImageSharp.fluid}/>
     </>
   )
 }
 
 export default IndexPage;
 
-const StyledHeroSection = styled.section`
+const StyledHeroSection = styled(StyledSection)`
   padding: 4rem;
-  display:flex;
-  height: calc(100vh - 100px);
-  width: 60%;
   justify-content: center;
-  flex-direction: column;
   align-items: flex-end;
   text-align: right;
-  > * {
-    padding-bottom: 3rem;
-  }
   span {
       display: block;
     }
   h1 {
-    font-size: ${({theme}) => theme.font.l};
+    font-size: ${({theme}) => theme.font.xl};
     font-weight: ${({theme}) => theme.font.bold};
   }
   .adressBox {
-    font-size: ${({theme}) => theme.font.s};
+    font-size: ${({theme}) => theme.font.xs};
     font-weight: ${({theme}) => theme.font.normal};
   }
   .mottoBox {
@@ -69,31 +64,8 @@ const StyledHeroSection = styled.section`
     display: flex;
     li {
       padding: 1rem 0 1rem 3rem;
-      font-size: ${({theme}) => theme.font.s};
+      font-size: ${({theme}) => theme.font.xs};
       font-weight: ${({theme}) => theme.font.bold};
     }
-  }
-`
-
-const StyledImg = styled(Img)`
-  position: fixed !important;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 40%;
-  object-fit: cover;
-  &::after, &::before {
-    content: '';
-    width: 20px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    background-color: ${({theme}) => theme.colors.primary}
-  }
-  &::before {
-    left: 20px;
-    background-color: ${({theme}) => theme.colors.secondary};
-    z-index: 1;
   }
 `;
