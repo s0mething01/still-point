@@ -52,6 +52,7 @@ const StyledHeroSection = styled(StyledSection)`
     font-size: ${({theme}) => theme.font.xl};
     font-weight: ${({theme}) => theme.font.bold};
     @media (max-width: 400px) {
+      margin-top: -10vh;
       font-size: ${({theme}) => theme.font.l};
     }
   }

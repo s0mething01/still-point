@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
             font-size: 38%;
         }
         @media (max-width: 375px) {
-            font-size: 32%;
+            font-size: 35%;
         }
     }
     ul {
