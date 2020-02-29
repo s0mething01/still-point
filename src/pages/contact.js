@@ -5,7 +5,8 @@ import BorderBox from '../styledComponents/BorderBox';
 import Footer from '../components/Footer';
 
 const ContactPage = () => {
-    const [checkBox, setCheckbox] = useState('0')
+    const [checkBox, setCheckbox] = useState('0');
+    const [isButtonActive, setButtonActivity] = useState(false);
     const handleInputChange = e => setCheckbox(e.target.value);
     return (
         <>
@@ -36,7 +37,17 @@ const ContactPage = () => {
                         <input type="text" placeholder="Temat"/>
                         <input type="text" placeholder="Twój Mail"/>
                         <textarea name="" id="" placeholder="Treść pytania"></textarea>
-                        <button type="submit">Wyślij</button>
+                        <button
+                            onTouchStart={() =>  setButtonActivity(true)}
+                            onTouchEnd={() =>  setButtonActivity(false)}
+                            onMouseOver={() => setButtonActivity(true)}
+                            onFocus={() => setButtonActivity(true)}
+                            onMouseOut={() =>  setButtonActivity(false)}
+                            onBlur={() =>  setButtonActivity(false)} 
+                            className={isButtonActive ? 'active' : null} 
+                            type="submit">
+                            Wyślij
+                        </button>
                 </Form>
             </StyledContactSection>
             <Footer />
@@ -58,7 +69,10 @@ const Form = styled.form`
         height: 200px;
         padding: 15px 20px;
         font-size: ${({theme}) => theme.font.xxs};
-        font-family: 'Montserrat'
+        font-family: 'Montserrat';
+        @media (max-width: 375px) {
+            height: 160px;
+        }
     }
     input {
         padding: 0 20px;
@@ -69,6 +83,9 @@ const Form = styled.form`
             visibility: none;
             display: none;
         }
+        @media (max-width: 375px) {
+            height: 40px;
+        }
     }
     button, label.checkboxLabel, input, textarea {
         margin-bottom: 2rem;
@@ -76,8 +93,11 @@ const Form = styled.form`
         font-size: ${({theme}) => theme.font.xs};
         font-weight: ${({theme}) => theme.font.normal};
         color:  ${({theme}) => theme.colors.primary};
+        box-shadow: 0px 3px 0px 0px ${({theme}) => theme.colors.secondary};
     }
     button {
+        border: 3px solid ${({theme}) => theme.colors.primary} !important;
+        cursor: pointer;
         height: 55px;
         border: 2px solid black;
         max-width: 220px;
@@ -86,6 +106,14 @@ const Form = styled.form`
         color: white;
         font-weight: ${({theme}) => theme.font.bold};
         font-size: ${({theme}) => theme.font.xs};
+        @media (max-width: 375px) {
+            height: 40px;
+            font-size: ${({theme}) => theme.font.s};
+        }
+        &.active {
+            color: ${({theme}) => theme.colors.primary};
+            background-color: #fff;
+        }
     }
     label {
         flex-grow: 1;
@@ -99,6 +127,9 @@ const Form = styled.form`
         &.active {
             background: ${({theme}) => theme.colors.primary};
             color: white;
+        }
+        @media (max-width: 375px) {
+            height: 40px;
         }
     }
     div {

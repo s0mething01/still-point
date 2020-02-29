@@ -23,6 +23,9 @@ const GlobalStyle = createGlobalStyle`
         @media (max-width: 600px) {
             font-size: 38%;
         }
+        @media (max-width: 375px) {
+            font-size: 32%;
+        }
     }
     ul {
         list-style: none;
