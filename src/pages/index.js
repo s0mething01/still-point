@@ -51,6 +51,9 @@ const StyledHeroSection = styled(StyledSection)`
   h1 {
     font-size: ${({theme}) => theme.font.xl};
     font-weight: ${({theme}) => theme.font.bold};
+    @media (max-width: 400px) {
+      font-size: ${({theme}) => theme.font.l};
+    }
   }
   .adressBox {
     font-size: ${({theme}) => theme.font.xs};
