@@ -1,22 +1,12 @@
-import React from 'react';
-import { useStaticQuery, graphql } from "gatsby";
+import React, { useState } from 'react';
+import { useStaticQuery, graphql, Link } from "gatsby";
 import styled from 'styled-components';
 import HeroImage from '../components/HeroImage';
 import StyledSection from '../styledComponents/StyledSection';
 import Footer from '../components/Footer';
 
 const IndexPage = ({theme}) => {
-  const data = useStaticQuery(graphql`
-    query queryForHeroImage {
-      file(name: {eq: "hero"}) {
-        childImageSharp {
-          fluid(duotone: { highlight: "#233540", shadow: "#192550", opacity: 50 }) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          }
-        }
-      }
-    }
-  `)
+  const [isButtonActive, setButtonActivity] = useState(false);
   return (
     <>
       <StyledHeroSection withImage theme={theme}>
@@ -30,10 +20,25 @@ const IndexPage = ({theme}) => {
           <li>#fizjoterapia</li>
           <li>#osteopatia</li>
         </ul>
+        <div>
+          <p className="offertBox">Wizyta fizjoterapeutyczna: <span>80zł</span></p>
+          <p className="offertBox">Wizyta osteopatyczna: <span>100zł</span></p>
+        </div>
         <p className="adressBox">ul. 17 Stycznia 22/1A, Zbąszyń</p>
+        <StyledLink 
+            to="/opinions"
+            onTouchStart={() =>  setButtonActivity(true)}
+            onTouchEnd={() =>  setButtonActivity(false)}
+            onMouseOver={() => setButtonActivity(true)}
+            onFocus={() => setButtonActivity(true)}
+            onMouseOut={() =>  setButtonActivity(false)}
+            onBlur={() =>  setButtonActivity(false)} 
+            className={isButtonActive ? 'active' : null} 
+            >Opinie
+        </StyledLink>
       </StyledHeroSection>
       <Footer withImage/>
-      <HeroImage fluid={data.file.childImageSharp.fluid}/>
+      <HeroImage/>
     </>
   )
 }
@@ -58,11 +63,23 @@ const StyledHeroSection = styled(StyledSection)`
   }
   .adressBox {
     font-size: ${({theme}) => theme.font.xs};
-    font-weight: ${({theme}) => theme.font.normal};
+    font-weight: ${({theme}) => theme.font.thin};
   }
   .mottoBox {
     font-size: ${({theme}) => theme.font.m};
     font-weight: ${({theme}) => theme.font.thin};
+  }
+  .offertBox {
+    font-size: ${({theme}) => theme.font.xs};
+    font-weight: ${({theme}) => theme.font.normal};
+    padding: .5rem;
+    letter-spacing: 1px;
+    span {
+      display: inline;
+      font-weight: ${({theme}) => theme.font.bold };
+      font-size: ${({theme}) => theme.font.s};
+      padding-left: 1rem;
+    }
   }
   ul {
     display: flex;
@@ -72,4 +89,35 @@ const StyledHeroSection = styled(StyledSection)`
       font-weight: ${({theme}) => theme.font.bold};
     }
   }
+`;
+
+const StyledLink = styled(Link)`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid ${({theme}) => theme.colors.primary} !important;
+        cursor: pointer;
+        height: 55px;
+        border: 2px solid black;
+        max-width: 220px;
+        width: 100%;
+        background-color: ${({theme}) => theme.colors.primary};
+        color: white;
+        font-weight: ${({theme}) => theme.font.bold};
+        font-size: ${({theme}) => theme.font.xs};
+        @media (max-width: 1400px) {
+            height: 45px;
+            font-size: ${({theme}) => theme.font.s};
+            max-width: 160px;
+        }
+        @media (max-width: 600px) {
+            height: 40px;
+            font-size: ${({theme}) => theme.font.s};
+            max-width: 120px;
+        }
+        box-shadow: 0px 3px 0px 0px ${({theme}) => theme.colors.secondary};
+        &.active {
+            color: ${({theme}) => theme.colors.primary};
+            background-color: #fff;
+        }
 `;

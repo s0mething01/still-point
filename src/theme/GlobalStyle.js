@@ -44,6 +44,7 @@ const GlobalStyle = createGlobalStyle`
     }
     input, textarea {
         font-family: 'Montserrat', sans-serif !important; 
+        border-radius: 0 !important;
     }
 `;
 

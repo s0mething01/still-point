@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from "prop-types";
 import Navigation from '../components/Navigation';
@@ -7,6 +7,8 @@ import { theme } from '../theme/theme';
 import { useStaticQuery, graphql } from "gatsby";
 
 const Layout = ({ children }) => {
+    const [isInstagramButtonActive, setInstagramButtonActivity] = useState(false);
+    const [isFacebookButtonActive, setFacebookButtonActivity] = useState(false);
     const icons = useStaticQuery(graphql`
         query iconsQuery {
             allFile(filter: {sourceInstanceName: {eq: "icons"}}) {
@@ -22,8 +24,25 @@ const Layout = ({ children }) => {
             <Navigation />
             <StyledMain>{children}</StyledMain>
             <StyledMediatBox theme={theme}>
-                <a href="https://www.instagram.com"><img src={icons.allFile.nodes[1].publicURL} alt=""/></a>
-                <a href="https://www.facebook.com"><img src={icons.allFile.nodes[0].publicURL} alt=""/></a>
+                <a
+                    onTouchStart={() =>  setInstagramButtonActivity(true)}
+                    onTouchEnd={() =>  setInstagramButtonActivity(false)}
+                    onMouseOver={() => setInstagramButtonActivity(true)}
+                    onFocus={() => setInstagramButtonActivity(true)}
+                    onMouseOut={() =>  setInstagramButtonActivity(false)}
+                    onBlur={() =>  setInstagramButtonActivity(false)}
+                    onFocus={() => setFacebookButtonActivity(true)}
+                    className={isInstagramButtonActive ? 'active' : null} 
+                    href="https://www.instagram.com"><img src={icons.allFile.nodes[1].publicURL} alt=""/></a>
+                <a 
+                    onTouchStart={() =>  setFacebookButtonActivity(true)}
+                    onTouchEnd={() =>  setFacebookButtonActivity(false)}
+                    onMouseOver={() => setFacebookButtonActivity(true)}
+                    onMouseOut={() =>  setFacebookButtonActivity(false)}
+                    onBlur={() =>  setFacebookButtonActivity(false)}
+                    onFocus={() => setFacebookButtonActivity(true)}
+                    className={isFacebookButtonActive ? 'active' : null} 
+                    href="https://www.facebook.com"><img src={icons.allFile.nodes[0].publicURL} alt=""/></a>
             </StyledMediatBox>
         </ThemeProvider>
     )
@@ -51,6 +70,7 @@ const StyledMediatBox = styled.div`
     bottom: 2rem;
     right: 2rem;
     a {
+        
         background-color: #fff;
         width: 125px;
         height: 100px;
@@ -62,6 +82,9 @@ const StyledMediatBox = styled.div`
         }
         &:last-child {
             border-left: 3px solid ${({theme}) => theme.colors.primary};
+        }
+        &.active {
+            background-color:  ${({theme}) => theme.colors.secondary};
         }
     }
     img {

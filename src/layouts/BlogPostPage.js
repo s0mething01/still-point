@@ -46,12 +46,12 @@ const StyledPostPageSection = styled(StyledSection)`
         }
     }
     h5 {
-        font-size: ${({theme}) => theme.font.m};
+        font-size: ${({theme}) => theme.font.l};
         font-weight: ${({theme}) => theme.font.bold}; 
         margin: 3rem 0;
     }
     a {
-        font-size: ${({theme}) => theme.font.s};
+        font-size: ${({theme}) => theme.font.m};
         font-weight: ${({theme}) => theme.font.bold};
         text-decoration: underline;
     }
