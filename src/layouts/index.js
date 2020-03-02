@@ -31,7 +31,6 @@ const Layout = ({ children }) => {
                     onFocus={() => setInstagramButtonActivity(true)}
                     onMouseOut={() =>  setInstagramButtonActivity(false)}
                     onBlur={() =>  setInstagramButtonActivity(false)}
-                    onFocus={() => setFacebookButtonActivity(true)}
                     className={isInstagramButtonActive ? 'active' : null} 
                     href="https://www.instagram.com"><img src={icons.allFile.nodes[1].publicURL} alt=""/></a>
                 <a 

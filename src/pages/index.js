@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { Link } from "gatsby";
 import styled from 'styled-components';
 import HeroImage from '../components/HeroImage';
 import StyledSection from '../styledComponents/StyledSection';
