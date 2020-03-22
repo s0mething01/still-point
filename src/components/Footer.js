@@ -1,19 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useStaticQuery, graphql } from "gatsby"
 
 const Footer = ({theme, withImage}) => {
+    const { allDatoCmsFooter }= useStaticQuery(
+        graphql`
+            query query {
+                allDatoCmsFooter {
+                nodes {
+                    addresvalue
+                    mailvalue
+                    maintopic
+                    phonevalue
+                    secondarytopic
+                }
+                }
+            }
+        `
+      )
+    const { maintopic, secondarytopic, mailvalue, phonevalue, addresvalue} = allDatoCmsFooter.nodes[0];
     return (
         <StyledFooter withImage={withImage}>
             <div className="footerHeaderBox">
-                <h2>Still Point</h2>
-                <h2>Natalia Gliniecka</h2>
+                <h2>{maintopic}</h2>
+                <h2>{secondarytopic}</h2>
                 {/* <h3>Natalia Gliniecka</h3> */}
             </div>
             <StyledContactBox theme={theme}>
-                <a href="mailto:still@point.com">Mail: still@point.com</a>
-                <a href="tel:+48545435355">Telefon: 545 435 355</a>
+                <a href={`mailto:${mailvalue}`}>Mail: {mailvalue}</a>
+                <a href={`tel:+48${phonevalue}`}>Telefon: {phonevalue}</a>
             </StyledContactBox>
-            <p className="adressBox">ul. 17 Stycznia 22/1A, Zbąszyń</p>
+    <p className="adressBox">{addresvalue}</p>
             <p className="authorBox">Stronę wykonał Mikołaj Zienkowicz {new Date().getFullYear()} ©</p>
         </StyledFooter>
      );

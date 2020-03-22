@@ -9,8 +9,14 @@ import { useStaticQuery, graphql } from "gatsby";
 const Layout = ({ children }) => {
     const [isInstagramButtonActive, setInstagramButtonActivity] = useState(false);
     const [isFacebookButtonActive, setFacebookButtonActivity] = useState(false);
-    const icons = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
         query iconsQuery {
+            allDatoCmsFooter {
+                nodes {
+                  instagramlink
+                  facebooklink
+                }
+              }
             allFile(filter: {sourceInstanceName: {eq: "icons"}}) {
                 nodes {
                   publicURL
@@ -32,7 +38,7 @@ const Layout = ({ children }) => {
                     onMouseOut={() =>  setInstagramButtonActivity(false)}
                     onBlur={() =>  setInstagramButtonActivity(false)}
                     className={isInstagramButtonActive ? 'active' : null} 
-                    href="https://www.instagram.com"><img src={icons.allFile.nodes[1].publicURL} alt=""/></a>
+                    href={data.allDatoCmsFooter.nodes[0].instagramlink}><img src={data.allFile.nodes[1].publicURL} alt=""/></a>
                 <a 
                     onTouchStart={() =>  setFacebookButtonActivity(true)}
                     onTouchEnd={() =>  setFacebookButtonActivity(false)}
@@ -41,7 +47,7 @@ const Layout = ({ children }) => {
                     onBlur={() =>  setFacebookButtonActivity(false)}
                     onFocus={() => setFacebookButtonActivity(true)}
                     className={isFacebookButtonActive ? 'active' : null} 
-                    href="https://www.facebook.com"><img src={icons.allFile.nodes[0].publicURL} alt=""/></a>
+                    href={data.allDatoCmsFooter.nodes[0].facebooklink}><img src={data.allFile.nodes[0].publicURL} alt=""/></a>
             </StyledMediatBox>
         </ThemeProvider>
     )

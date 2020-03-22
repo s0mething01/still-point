@@ -12,7 +12,7 @@ const BlogPage = ({data}) => {
             <StyledBlogSection>
                 <h1>Blog</h1>
                 <BorderBox />
-                <p>Kiedy robisz to co kochasz, nigdy nie <span>przepracujesz ani jednego dnia.</span></p>
+                <p>{data.allDatoCmsQuotation.nodes[0].contactpagequotation}</p>
                 <StyledBlogGrid>
                     {data.allDatoCmsArticle.nodes.map(({slug, title, id, meta, hashtags, postavatar}, index) => (
                         <BlogCard 
@@ -54,6 +54,11 @@ const StyledBlogGrid = styled.section`
 
 export const query = graphql`
     query datoArctclesContent {
+        allDatoCmsQuotation {
+            nodes {
+                contactpagequotation
+            }
+        }
         allDatoCmsArticle {
             nodes {
                 title

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import StyledSection from '../styledComponents/StyledSection';
 import BorderBox from '../styledComponents/BorderBox';
 import Footer from '../components/Footer';
 
-const ContactPage = () => {
+const ContactPage = ({data}) => {
     const [checkBox, setCheckbox] = useState('rada');
     const [isButtonActive, setButtonActivity] = useState(false);
     const handleInputChange = e => setCheckbox(e.target.value);
@@ -13,9 +14,7 @@ const ContactPage = () => {
             <StyledContactSection>
                 <h1>Kontakt</h1>
                 <BorderBox />
-                <Paragraph>Kiedy robisz to co kochasz, 
-                    nigdy nie <span>przepracujesz ani jednego dnia.</span>
-                </Paragraph>
+                <Paragraph>{data.allDatoCmsQuotation.nodes[0].contactpagequotation}</Paragraph>
                 <Form name="contact" method="POST" data-netlify="true" action="/succes">
                         <input type="hidden" name="form-name" value="contact" />
                         <div>
@@ -158,4 +157,14 @@ const Paragraph = styled.p`
     padding: 1rem 0;
     font-size: ${({theme, isBig}) => isBig ? theme.font.m : theme.font.s};
     font-weight: ${({theme, isBold}) => isBold ? theme.font.bold : theme.font.thin};
+`;
+
+export const query = graphql`
+  query contactPageQuotation {
+    allDatoCmsQuotation {
+        nodes {
+          contactpagequotation
+        }
+      }
+  }
 `;
